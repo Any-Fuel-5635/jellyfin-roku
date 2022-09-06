@@ -33,8 +33,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
         ScanForServers()
     else if key = "back" and m.serverUrlContainer.hasFocus() and m.servers.Count() > 0
         m.serverPicker.setFocus(true)
-    else if key = "back" and m.serverUrlContainer.hasFocus() and m.servers.Count() > 0
-        m.serverPicker.setFocus(true)
     else if key = "OK" and m.serverUrlContainer.hasFocus()
         ShowKeyboard()
     else if key = "back" and m.submit.hasFocus() and m.servers.Count() > 0
