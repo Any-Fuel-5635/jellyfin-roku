@@ -33,6 +33,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
         ScanForServers()
     else if key = "back" and m.serverUrlContainer.hasFocus() and m.servers.Count() > 0
         m.serverPicker.setFocus(true)
+    else if key = "back" and m.serverUrlContainer.hasFocus() and m.servers.Count() > 0
+        m.serverPicker.setFocus(true)
     else if key = "OK" and m.serverUrlContainer.hasFocus()
         ShowKeyboard()
     else if key = "back" and m.submit.hasFocus() and m.servers.Count() > 0
@@ -43,7 +45,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         ScanForServers()
     else if key = "back" and m.serverPicker.hasFocus() and m.servers.Count() > 0
         ScanForServers()
-        ' On "back" with or without available local servers, will rescan for servers
+        ' On back with available servers or not, will rescan for servers
     else if key = "up" and m.submit.hasFocus()
         m.serverUrlContainer.setFocus(true)
         'focus the submit button from serverUrl
