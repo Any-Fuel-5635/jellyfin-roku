@@ -344,9 +344,9 @@ function getTranscodeReasons(url as string) as object
     return []
 end function
 
-'Opens dialog asking user if they want to resume video or start playback over
+'Opens dialog asking user if they want to resume video or start playback over only on the home screen
 function startPlayBackOver(time as longinteger) as integer
-    if m.videotype = "Episode" or m.videotype = "Series"
+    if m.scene.focusedChild.focusedChild.overhangTitle = tr("Home") and (m.videotype = "Episode" or m.videotype = "Series")
         return option_dialog([tr("Resume playing at ") + ticksToHuman(time) + ".", tr("Start over from the beginning."), tr("Watched"), tr("Go to series"), tr("Go to season"), tr("Go to episode")])
     else
         return option_dialog(["Resume playing at " + ticksToHuman(time) + ".", "Start over from the beginning."])
@@ -427,10 +427,10 @@ sub autoPlayNextEpisode(videoID as string, showID as string)
         data = getJson(resp)
 
         if data <> invalid and data.Items.Count() = 2
-            ' remove finished video node
-            m.global.sceneManager.callFunc("popScene")
             ' setup new video node
             nextVideo = CreateVideoPlayerGroup(data.Items[1].Id, invalid, 1, false, false)
+            ' remove last video scene
+            m.global.sceneManager.callFunc("clearPreviousScene")
             if nextVideo <> invalid
                 m.global.sceneManager.callFunc("pushScene", nextVideo)
             else
